@@ -3,7 +3,11 @@ const app = express(); //invoke express
 const port = 5000; //port to listen on
 const Mongoose = require('mongoose'); //import mongoose
 const {MongoURL} = require('./keys'); //require mongo atlas connect url
-require('./models/user') //user schema
+
+
+app.use(express.json()); //use json to parse incoming requests
+app.use(require('./routes/auth')) //use routes
+
 
 /*
 * Connect to DB

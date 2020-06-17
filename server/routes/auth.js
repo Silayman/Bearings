@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
-
+const jwt = require("jsonwebtoken");
+const {JWT_TOKEN_SECRET} = require('../keys');
 /*
 * Sign in page
 */
@@ -14,8 +15,12 @@ router.post('/accounts/signin', (req,res)=>{
                 bcrypt.compare(password, existingUser.password)
                     .then(passwordMatch=>{
                         if(passwordMatch){
+                            const token = jwt.sign({
+                                id: existingUser._id
+                            }, JWT_TOKEN_SECRET)
                             res.status(200).json({
-                                success: "Successfully Signed In!"
+                                success: "Successfully Signed In!",
+                                token: token
                             })
                         }
                         else{

@@ -2,11 +2,45 @@ const express = require('express');
 const router = express.Router();
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
+
 /*
-* Default get page
+* Sign in page
 */
-router.get('/', (req,res)=>{
-    res.send("Login!")
+router.post('/accounts/signin', (req,res)=>{
+    const {email,password} = req.body;
+    user.findOne({email:email})
+        .then(existingUser=>{
+            if(existingUser){
+                bcrypt.compare(password, existingUser.password)
+                    .then(passwordMatch=>{
+                        if(passwordMatch){
+                            res.status(200).json({
+                                success: "Successfully Signed In!"
+                            })
+                        }
+                        else{
+                            return res.status(422).json({
+                                error: "Invalid Email or Password!"
+                            })
+                        }
+                    })
+                    .catch(err=>{
+                        return res.status(400).json({
+                            error: "Error signing in!"
+                        })
+                    })
+            }
+            else{
+                res.status(422).json({
+                    error: "Invalid Email or Password!"
+                })
+            }
+        })
+        .catch(err=>{
+            res.status(422).json({
+                error: "Invalid Email or Password!"
+            })
+        })
 })
 
 /*
@@ -29,17 +63,25 @@ router.post('/accounts/signup', (req,res)=>{
             bcrypt.genSalt(10,(err, salt)=>{
                 bcrypt.hash(newUser.password, salt, (err, hash)=>{
                     if(err){
-                        return res.status(400).json({error: "Error hasing password!"});
+                        return res.status(400).json({
+                            error: "Error hashing password!"
+                        });
                     }
                     newUser.password = hash;
                     newUser.save()
-                    .then(() => res.status(200).json({success: "Successfully Signed Up!"}))
-                    .catch(err => res.status(400).json({error: err}));
+                    .then(() => res.status(200).json({
+                        success: "Successfully Signed Up!"
+                    }))
+                    .catch(err => res.status(400).json({
+                        error: err
+                    }));
                 })
             })
         })
         .catch(err=>{
-            console.log(err);
+            return res.status(400).json({
+                error: "Error signing up!"
+            })
         })
 })
 

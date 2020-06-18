@@ -5,9 +5,6 @@ const Mongoose = require('mongoose'); //import mongoose
 const {MongoURL} = require('./keys'); //require mongo atlas connect url
 
 
-app.use(express.json()); //use json to parse incoming requests
-app.use(require('./routes/auth')) //use routes
-
 
 /*
 * Connect to DB
@@ -32,8 +29,11 @@ Mongoose.connection.on('error',(err)=>{
     console.log("Error connecting to Mongo Atlas Database:", err);
 })
 
-
-
+const user = require('./models/user');
+const post = require('./models/post');
+app.use(express.json()); //use json to parse incoming requests
+app.use(require('./routes/auth')) //use auth route
+app.use(require('./routes/post')) //use post route
 
 /*
  * Listen to given port

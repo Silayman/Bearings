@@ -17,11 +17,12 @@ module.exports = (req,res,next)=>{
                 error: "You must be logged in!"
             })
         }
-        const {_id} = payload;
-        user.findById(_id).then(existingUserData=>{
+        const {id} = payload;
+        user.findById(id).then(existingUserData=>{
             req.user = existingUserData;
+            next();
         })
-        next();
+        
     })
 
 }

@@ -18,6 +18,7 @@ module.exports = (req,res,next)=>{
             })
         }
         const {id} = payload;
+        console.log(payload);
         user.findById(id).then(existingUserData=>{
             req.user = existingUserData;
             next();

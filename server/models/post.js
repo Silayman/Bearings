@@ -11,7 +11,7 @@ const postSchema = new Mongoose.Schema({
     },
     author:{
         type: ObjectId,
-        referrer: "user"
+        ref: "User"
     }
 })
 

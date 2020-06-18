@@ -47,5 +47,21 @@ router.post('/post',requireAuth, (req,res)=>{
         })
 })
 
-
+/**
+ * Get user profile
+ */
+router.get('/profile',requireAuth, (req,res)=>{
+    Post.find({author: req.user._id})
+        .populate("author", "_id name")
+        .then(userPosts=>{
+            res.json({
+                userPosts
+            })
+        })
+        .catch(err=>{
+            res.status(400).json({
+                error: "Error getting profile!"
+            })
+        })
+})
 module.exports = router;

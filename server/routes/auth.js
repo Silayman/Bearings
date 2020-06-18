@@ -4,6 +4,8 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const {JWT_TOKEN_SECRET} = require('../keys');
+
+
 /*
 * Sign in page
 */

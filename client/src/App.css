@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+.brand-logo{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.loginCard{
+    margin-top: 25px;
+}
+.loginCard a {
+    color: black !important;
+}
+.card{
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.input-field input[type=text]:focus{
+    border-bottom: 1px solid black !important;
+    box-shadow: 0 1px 0 0 black !important;
+}

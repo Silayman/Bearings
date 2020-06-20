@@ -11,7 +11,7 @@ router.get('/', (req,res)=>{
     Post.find()
         .populate("author","_id name")
         .then(posts=>{
-            res.json({
+            res.status(200).json({
                 posts
             })
         })
@@ -36,7 +36,7 @@ router.post('/post',requireAuth, (req,res)=>{
     })
     post.save()
         .then(result=>{
-            res.json({
+            res.status(200).json({
                 post: result
             })
         })
@@ -54,7 +54,7 @@ router.get('/profile',requireAuth, (req,res)=>{
     Post.find({author: req.user._id})
         .populate("author", "_id name")
         .then(userPosts=>{
-            res.json({
+            res.status(200).json({
                 userPosts
             })
         })

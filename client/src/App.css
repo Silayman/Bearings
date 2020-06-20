@@ -22,3 +22,13 @@
     border-bottom: 1px solid black !important;
     box-shadow: 0 1px 0 0 black !important;
 }
+
+.posts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.post{
+    width: 30%;
+}

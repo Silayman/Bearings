@@ -55,6 +55,9 @@ router.post('/accounts/signin', (req,res)=>{
 */
 router.post('/accounts/signup', (req,res)=>{
     const {name, email, password} = req.body;
+    if(!email || !password || !name){
+        return res.status(422).json({error:"Please fill all the fields!"})
+     }
     user.findOne({email:email})
         .then((existingUser)=>{
             if(existingUser){
@@ -70,8 +73,9 @@ router.post('/accounts/signup', (req,res)=>{
             bcrypt.genSalt(10,(err, salt)=>{
                 bcrypt.hash(newUser.password, salt, (err, hash)=>{
                     if(err){
+                        console.log(newUser.password);
                         return res.status(400).json({
-                            error: "Error hashing password!"
+                            error: "Error signing up!"
                         });
                     }
                     newUser.password = hash;

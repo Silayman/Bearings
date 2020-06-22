@@ -10,7 +10,7 @@ const Feed = ()=>{
                 </div>
                 <div className="card-content">
                     <h6>Grindin'</h6>
-                    <i class="material-icons left">favorite</i>
+                    <i className="material-icons left">favorite</i>
                     <input type="text" placeholder="Add a comment..."></input>
                 </div>
             </div>
@@ -21,7 +21,7 @@ const Feed = ()=>{
                 </div>
                 <div className="card-content">
                     <h6>Grindin'</h6>
-                    <i class="material-icons left">favorite</i>
+                    <i className="material-icons left">favorite</i>
                     <input type="text" placeholder="Add a comment..."></input>
                 </div>
             </div>
@@ -32,7 +32,7 @@ const Feed = ()=>{
                 </div>
                 <div className="card-content">
                     <h6>Grindin'</h6>
-                    <i class="material-icons left">favorite</i>
+                    <i className="material-icons left">favorite</i>
                     <input type="text" placeholder="Add a comment..."></input>
                 </div>
             </div>

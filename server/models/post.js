@@ -1,19 +1,19 @@
-const Mongoose = require('mongoose');
-const {ObjectId} = Mongoose.Schema.Types;
+const Mongoose = require("mongoose");
+const { ObjectId } = Mongoose.Schema.Types;
 const postSchema = new Mongoose.Schema({
-    caption:{
-        type: String,
-        required: false
-    },
-    image:{
-        type: String,
-        required: true
-    },
-    author:{
-        type: ObjectId,
-        ref: "User"
-    }
-})
+  caption: {
+    type: String,
+    required: false,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: ObjectId,
+    ref: "User",
+  },
+});
 
-const post = Mongoose.model("Post", postSchema); 
+const post = Mongoose.model("Post", postSchema);
 module.exports = post; //export user

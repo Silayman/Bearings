@@ -32,6 +32,9 @@ const Signup = ()=>{
                 history.push('/accounts/signin')
             }
         })
+        .catch(err=>{
+            console.log(err);
+        })
     }
     return(
         <div className="loginCard">

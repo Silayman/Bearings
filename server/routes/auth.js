@@ -20,9 +20,15 @@ router.post('/accounts/signin', (req,res)=>{
                             const token = jwt.sign({
                                 id: existingUser._id
                             }, JWT_TOKEN_SECRET)
+                            const {_id, name, email} = existingUser;
                             res.status(200).json({
                                 success: "Successfully Signed In!",
-                                token: token
+                                token: token,
+                                user: {
+                                    _id,
+                                    name,
+                                    email
+                                }
                             })
                         }
                         else{

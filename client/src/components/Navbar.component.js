@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 
 const NavBar = () => {
   const { state, dispatch } = useContext(UserContext);
+  const history = useHistory();
   const renderNav = () => {
     if (state) {
       return [
@@ -11,7 +12,20 @@ const NavBar = () => {
           <Link to="/profile">Profile</Link>
         </li>,
         <li>
-          <Link to="/post">Create a post</Link>
+          <Link to="/post">Post</Link>
+        </li>,
+        <li>
+          <button
+            className="btn waves-effect waves-light #000000 black capitalize"
+            style={{ textTransform: "capitalize", margin: "-3px 5px auto" }}
+            onClick={() => {
+              localStorage.clear();
+              dispatch({ type: "CLEAR" });
+              history.push("/accounts/signin");
+            }}
+          >
+            Logout
+          </button>
         </li>,
       ];
     } else {

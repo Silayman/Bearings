@@ -1,41 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Feed = () => {
+  const [feedData, setfeedData] = useState([]);
+  useEffect(() => {
+    fetch("/feed", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setfeedData(result.posts);
+      });
+  }, []);
   return (
     <div className="feed input-field">
-      <div className="card feed-card">
-        <h5>TonyHawk</h5>
-        <div className="card-image">
-          <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
-        </div>
-        <div className="card-content">
-          <h6>Grindin'</h6>
-          <i className="material-icons left">favorite</i>
-          <input type="text" placeholder="Add a comment..."></input>
-        </div>
-      </div>
-      <div className="card feed-card">
-        <h5>TonyHawk</h5>
-        <div className="card-image">
-          <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
-        </div>
-        <div className="card-content">
-          <h6>Grindin'</h6>
-          <i className="material-icons left">favorite</i>
-          <input type="text" placeholder="Add a comment..."></input>
-        </div>
-      </div>
-      <div className="card feed-card">
-        <h5>TonyHawk</h5>
-        <div className="card-image">
-          <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
-        </div>
-        <div className="card-content">
-          <h6>Grindin'</h6>
-          <i className="material-icons left">favorite</i>
-          <input type="text" placeholder="Add a comment..."></input>
-        </div>
-      </div>
+      {feedData.map((item) => {
+        return (
+          <div className="card feed-card" key={item._id}>
+            <h5>{item.author.name}</h5>
+            <div className="card-image">
+              <img src={item.image} />
+            </div>
+            <div className="card-content">
+              <h6>{item.caption}'</h6>
+              <i className="material-icons left">favorite</i>
+              <input type="text" placeholder="Add a comment..."></input>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

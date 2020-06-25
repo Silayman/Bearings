@@ -7,7 +7,7 @@ const Post = require("../models/post");
 /**
  *  Get feed
  */
-router.get("/", (req, res) => {
+router.get("/feed", requireAuth, (req, res) => {
   Post.find()
     .populate("author", "_id name")
     .then((posts) => {
